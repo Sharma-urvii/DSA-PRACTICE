@@ -1,0 +1,66 @@
+// BRUTE FORCE : -
+// TIME COMPLEXITY :- O(n × m × (n + m))
+// SPACE COMPLEXITY : O(1)
+#include <iostream>
+using namespace std;
+
+int arr[100][100];
+int n, m;
+
+
+void mark_row(int i) {
+    for(int j = 0; j < m; j++) {
+        if(arr[i][j] != 0) {
+            arr[i][j] = -1;
+        }
+    }
+}
+
+
+void mark_col(int j) {
+    for(int i = 0; i < n; i++) {
+        if(arr[i][j] != 0) {
+            arr[i][j] = -1;
+        }
+    }
+}
+
+int main() {
+    cin >> n >> m;
+
+    // Input matrix
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    // Step 1: Mark rows & columns where 0 found
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(arr[i][j] == 0) {
+                mark_row(i);
+                mark_col(j);
+            }
+        }
+    }
+
+    // Step 2: Convert -1 to 0
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(arr[i][j] == -1) {
+                arr[i][j] = 0;
+            }
+        }
+    }
+
+    // Output
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
