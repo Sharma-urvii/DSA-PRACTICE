@@ -1,0 +1,56 @@
+// BETTER APPROACH :-
+// TIME COMPLEXITY :- O(n × m) + O(n × m) = O(n × m)
+// SPACE COMPLEXITY :- O(n + m)
+#include<iostream>
+#include<vector>
+using namespace std;
+
+void ZEROMATRIX(vector<vector<int>>& matrix, int n, int m) {
+    vector<int> row(n, 0);
+    vector<int> col(m, 0);
+
+    // Step 1: mark rows and cols
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(matrix[i][j] == 0) {
+                row[i] = 1;
+                col[j] = 1;
+            }
+        }
+    }
+
+    // Step 2: update matrix
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            if(row[i] == 1 || col[j] == 1) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+
+    vector<vector<int>> matrix(n, vector<int>(m));
+
+    // input
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    ZEROMATRIX(matrix, n, m);
+
+    // output
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < m; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
